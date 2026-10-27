@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f4ee">
+<title>39天減脂小管家</title>
+<style>
+:root{--bg:#f7f4ee;--card:#fffdf9;--ink:#26352e;--muted:#778078;--green:#557a61;--green2:#e4eee4;--peach:#f5e5d8;--line:#e8e3da;--gold:#d7ad5a;--red:#b75c4c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;line-height:1.55}
+.app{max-width:760px;margin:auto;padding:16px 14px 44px}.hero{padding:21px;border-radius:24px;background:linear-gradient(135deg,#e4eee4,#f7eadf);margin-bottom:15px}
+.eyebrow{font-size:12px;letter-spacing:1.5px;color:var(--green);font-weight:800}h1{font-size:27px;line-height:1.25;margin:8px 0}.hero p{margin:7px 0 0;color:#526056;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.stat{background:#ffffffb8;border-radius:13px;padding:9px 4px;text-align:center;overflow-wrap:anywhere}.stat b{display:block;font-size:15px}.stat span{font-size:10px;color:var(--muted)}
+.progress-wrap{margin-top:15px}.progress-label{display:flex;justify-content:space-between;font-size:12px;color:#526056;margin-bottom:6px}.progress{height:7px;background:#ffffffb8;border-radius:20px;overflow:hidden}.bar{height:100%;width:0;background:var(--green);transition:width .2s}
+.section-title{font-size:17px;font-weight:800;margin:21px 2px 10px}.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-bottom:14px}
+.daybtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 1px;font-size:11px;cursor:pointer}.daybtn strong{display:block;font-size:14px;margin-bottom:2px}.daybtn.active{background:var(--green);border-color:var(--green);color:white}.daybtn.done:after{content:"✓";display:block;font-size:10px;color:var(--gold);height:12px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:15px;margin-bottom:12px}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.panel h2{font-size:19px;margin:0 0 3px}.sub{font-size:12px;color:var(--muted)}.pill{font-size:11px;border-radius:99px;padding:5px 9px;background:var(--green2);color:var(--green);white-space:nowrap;font-weight:700}
+h3{font-size:14px;margin:16px 0 8px}.meal{padding:10px 0;border-bottom:1px solid var(--line)}.meal:last-child{border-bottom:0}.meal-top{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:14px}.kcal{font-size:12px;color:var(--green);white-space:nowrap}.meal p{font-size:13px;color:#5d675f;margin:4px 0 0}
+.checkrow{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.checkrow:last-child{border-bottom:0}.checkrow input{margin-top:4px;accent-color:var(--green);width:17px;height:17px;flex-shrink:0}.checkrow small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.note{background:#f7efe3;padding:11px 12px;border-radius:12px;font-size:12px;color:#65563f;margin-top:11px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.action{border:0;border-radius:12px;padding:11px 12px;font-weight:700;cursor:pointer;font-size:13px}.primary{background:var(--green);color:white}.secondary{background:var(--green2);color:var(--green)}.danger{background:#f8e8e3;color:var(--red)}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}.field input,.field select{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);font-size:15px;min-width:0}
+.water-count{font-size:30px;font-weight:800;color:var(--green)}.water-cups{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:10px 0}.cup{border:1px solid #cbd8cc;border-radius:9px;background:#fff;padding:8px 0;cursor:pointer;font-size:17px}.cup.full{background:#dcebdd;border-color:var(--green)}.muted{font-size:12px;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;background:#fff;border-radius:12px}.entry{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;font-size:13px}.entry:last-child{border-bottom:0}.entry button{border:0;background:transparent;color:var(--red);font-size:12px}
+.tabs{display:flex;gap:7px;overflow:auto;margin:10px 0 14px}.tab{border:1px solid var(--line);border-radius:99px;background:var(--card);padding:8px 13px;white-space:nowrap;font-size:12px;color:var(--ink)}.tab.active{background:var(--green);color:white;border-color:var(--green)}
+footer{font-size:11px;color:var(--muted);text-align:center;margin:24px 8px}
+@media(min-width:600px){.week{gap:9px}.daybtn{padding:12px 4px}.app{padding:26px 20px 50px}.stat b{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="eyebrow">YOUR 39-DAY RESET</div>
+  <h1>減脂小管家 🌿</h1>
+  <p>一週菜單・健身計畫・體重與體脂追蹤<br>每天進步一點，不用追求完美。</p>
+  <div class="stats">
+    <div class="stat"><b>1,500–1,650</b><span>每日熱量參考 kcal</span></div>
+    <div class="stat"><b>100–120 g</b><span>每日蛋白質目標</span></div>
+    <div class="stat"><b id="countdown">倒數中</b><span>距離健檢日</span></div>
+  </div>
+  <div class="progress-wrap"><div class="progress-label"><span>本週打卡進度</span><span id="progressText">0 / 0 項</span></div><div class="progress"><div class="bar" id="progressBar"></div></div></div>
+</header>
+
+<div class="panel">
+ <div class="panel-head"><div><h2>📅 39 天倒數</h2><div class="sub">預設健檢日：2026/12/04，可自行修改</div></div><span class="pill" id="daysPassed">第 1 天</span></div>
+ <div class="formgrid" style="margin-top:12px">
+  <div class="field"><label for="startDate">計畫開始日</label><input type="date" id="startDate" value="2026-10-27"></div>
+  <div class="field"><label for="targetDate">健檢日期</label><input type="date" id="targetDate" value="2026-12-04"></div>
+ </div>
+ <div class="note" id="countdownNote">每天穩定執行就好，倒數不是要你挨餓。</div>
+</div>
+
+<div class="tabs" role="tablist">
+ <button class="tab active" data-tab="plan">一週計畫</button>
+ <button class="tab" data-tab="track">體重／體脂</button>
+ <button class="tab" data-tab="water">喝水紀錄</button>
+ <button class="tab" data-tab="shopping">採買清單</button>
+</div>
+<section id="planTab">
+ <div class="section-title">選擇星期</div><nav class="week" id="weekNav" aria-label="一週菜單"></nav><div id="content"></div>
+</section>
+<section id="trackTab" hidden>
+ <div class="panel">
+  <div class="panel-head"><div><h2>⚖️ 體重與體脂紀錄</h2><div class="sub">建議固定在起床、上完廁所後測量</div></div></div>
+  <div class="formgrid" style="margin-top:12px">
+   <div class="field"><label for="recordDate">日期</label><input type="date" id="recordDate"></div>
+   <div class="field"><label for="weightInput">體重（kg）</label><input type="number" id="weightInput" min="20" max="300" step="0.1" placeholder="例如 60.6"></div>
+   <div class="field"><label for="fatInput">體脂（%）</label><input type="number" id="fatInput" min="1" max="75" step="0.1" placeholder="例如 32"></div>
+   <div class="field"><label for="waistInput">腰圍（cm，可選）</label><input type="number" id="waistInput" min="30" max="250" step="0.1" placeholder="例如 75"></div>
+  </div>
+  <div class="actions"><button class="action primary" id="saveRecord">儲存紀錄</button><button class="action secondary" id="exportData">匯出備份</button><label class="action secondary" for="importFile" style="cursor:pointer">匯入備份</label><input type="file" id="importFile" accept="application/json" hidden></div>
+  <div class="note">資料會自動儲存在這個瀏覽器的本機儲存空間。清除網站資料、換瀏覽器或換手機可能會遺失，建議定期匯出備份。</div>
+ </div>
+ <div class="panel"><h2>📈 變化圖</h2><div class="sub">有至少 2 筆紀錄才會顯示趨勢線</div><h3>體重（kg）</h3><canvas id="weightChart" class="chart" width="620" height="220"></canvas><h3>體脂率（%）</h3><canvas id="fatChart" class="chart" width="620" height="220"></canvas><h3>最近紀錄</h3><div id="recordList"></div></div>
+</section>
+<section id="waterTab" hidden>
+ <div class="panel">
+  <div class="panel-head"><div><h2>💧 每日飲水量</h2><div class="sub">每杯預設 250 ml，可依自己的杯子調整</div></div></div>
+  <div class="formgrid" style="margin-top:12px">
+   <div class="field"><label for="waterDate">紀錄日期</label><input type="date" id="waterDate"></div>
+   <div class="field"><label for="cupSize">每杯容量（ml）</label><select id="cupSize"><option value="150">150 ml</option><option value="200">200 ml</option><option value="250" selected>250 ml</option><option value="300">300 ml</option><option value="350">350 ml</option><option value="500">500 ml</option></select></div>
+  </div>
+  <div style="margin-top:13px"><div class="water-count"><span id="waterMl">0</span> <span style="font-size:15px">ml</span></div><div class="muted" id="waterCupsText">0 杯</div></div>
+  <div class="water-cups" id="waterCups"></div>
+  <div class="actions"><button class="action primary" id="addWater">＋ 加一杯</button><button class="action secondary" id="removeWater">－ 減一杯</button><button class="action secondary" id="clearWater">清空當日</button></div>
+  <div class="note">喝水需求會因體型、天氣、運動及健康狀況不同。這裡只協助記錄，不代表每個人都必須喝到固定量；以口渴、尿液顏色及醫療建議作調整。</div>
+ </div>
+ <div class="panel"><h2>最近飲水紀錄</h2><div id="waterHistory"></div></div>
+</section>
+<section id="shoppingTab" hidden>
+ <div class="panel">
+  <div class="panel-head"><div><h2>🛒 一週採買清單</h2><div class="sub">勾選已買食材，資料會自動保存</div></div></div>
+  <h3>蛋白質</h3>
+  <label class="checkrow"><input type="checkbox" data-shop="雞胸肉 600–800 g"><span>雞胸肉 600–800 g</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="去皮雞腿排 1–2 片"><span>去皮雞腿排 1–2 片</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="魚排 1–2 片"><span>鮭魚或白肉魚 1–2 片</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="冷凍蝦仁 1 包"><span>冷凍蝦仁 1 包、雞蛋 10–12 顆</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="豆腐豆漿優格"><span>嫩豆腐 3–4 盒、無糖豆漿、無糖優格</span></label>
+  <h3>蔬菜與水果</h3>
+  <label class="checkrow"><input type="checkbox" data-shop="花椰菜"><span>花椰菜 2 顆或冷凍花椰菜 1–2 包</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="菇類"><span>金針菇、香菇或鴻喜菇</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="其他蔬菜"><span>小黃瓜、紅蘿蔔、青菜、番茄</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="水果"><span>香蕉 5–7 根、其他喜歡的水果</span></label>
+  <h3>主食與調味</h3>
+  <label class="checkrow"><input type="checkbox" data-shop="主食"><span>全麥吐司、燕麥、白米／糙米、地瓜、南瓜</span></label>
+  <label class="checkrow"><input type="checkbox" data-shop="調味料"><span>黑胡椒、蒜頭、醬油、少量烹調油</span></label>
+ </div>
+</section>
+<footer>熱量為估算值，外食會因份量與烹調方式而有差異。體重與體脂的短期波動很常見，請觀察趨勢，不必追求每天下降。</footer>
+</div>
+<script>
+const STORAGE_KEY='fatloss39_v2';
+const days=[
+{name:"週一",type:"重訓 A｜下肢＋核心",focus:"下肢與核心",meals:[["早餐","全麥吐司 2 片＋水煮蛋 2 顆＋無糖豆漿 250 ml","約 350 kcal"],["午餐","雞胸健康餐；飯正常吃、醬料分開","約 500–600 kcal"],["運動前","香蕉 1 根＋無糖豆漿 200 ml","約 180 kcal"],["晚餐","氣炸雞胸 120–150 g＋南瓜 150 g＋花椰菜 200 g；可搭熟飯 100 g","約 450–550 kcal"]],workout:[["暖身","快走或腳踏車 5–8 分鐘"],["高腳杯深蹲","3 組 × 8–12 下"],["羅馬尼亞硬舉","3 組 × 8–12 下"],["臀推","3 組 × 10–12 下"],["平板支撐","3 組 × 20–40 秒"],["收操","輕鬆走路與伸展 5 分鐘"]]},
+{name:"週二",type:"恢復日｜散步＋活動度",focus:"恢復與步行",meals:[["早餐","無糖優格 200 g＋燕麥 30 g＋半根香蕉＋水煮蛋 1 顆","約 350 kcal"],["午餐","滷排骨便當；飯約 2/3–1 碗、青菜正常吃","約 600–750 kcal"],["下午點心","無糖高蛋白豆漿 1 瓶","約 120–180 kcal"],["晚餐","蝦仁豆腐蒸蛋＋青菜 200 g＋熟飯 100 g","約 400–500 kcal"]],workout:[["散步","20–35 分鐘，能輕鬆說話的速度"],["活動度","髖部、胸椎、腳踝活動 5–8 分鐘"],["小提醒","今天不必做高強度訓練，讓肌肉恢復。"]]},
+{name:"週三",type:"重訓 B｜上肢＋核心",focus:"上肢與核心",meals:[["早餐","全麥吐司 2 片＋炒蛋 2 顆＋無糖豆漿 250 ml","約 350–400 kcal"],["午餐","雞胸健康餐；飯正常吃","約 500–600 kcal"],["運動前","地瓜 150 g＋茶葉蛋 1 顆","約 200–230 kcal"],["晚餐","雞肉菇菇豆腐湯＋熟飯 100–150 g","約 450–500 kcal"]],workout:[["暖身","快走 5 分鐘＋肩部活動"],["滑輪下拉／彈力帶下拉","3 組 × 8–12 下"],["坐姿划船","3 組 × 8–12 下"],["啞鈴肩推","2–3 組 × 8–12 下"],["胸推／跪姿伏地挺身","3 組 × 8–12 下"],["死蟲式","3 組 × 每側 8–10 下"]]},
+{name:"週四",type:"恢復日｜輕活動",focus:"輕活動與飲食穩定",meals:[["早餐","無糖豆漿 300 ml＋全麥吐司 2 片＋水煮蛋 1 顆","約 350–400 kcal"],["午餐","滷排骨便當；若是炸排骨，晚餐選清淡少油","約 600–750 kcal"],["下午點心","無糖優格 150–200 g","約 90–150 kcal"],["晚餐","雞胸肉 120–150 g＋菇類與青菜＋熟飯 100–150 g","約 400–500 kcal"]],workout:[["散步","20–30 分鐘"],["伸展","肩頸、臀腿、髖部 5–10 分鐘"],["小提醒","若疲勞或痠痛明顯，可以完全休息。"]]},
+{name:"週五",type:"重訓 C｜全身",focus:"全身肌力",meals:[["早餐","燕麥 40 g＋無糖豆漿 300 ml＋水煮蛋 2 顆","約 400–450 kcal"],["午餐","雞胸健康餐；飯正常吃","約 500–600 kcal"],["運動前","香蕉 1 根＋茶葉蛋 1 顆","約 170–200 kcal"],["晚餐","去皮雞腿排 150 g＋炒菇類＋青菜＋熟飯 100 g","約 450–500 kcal"]],workout:[["暖身","快走 5–8 分鐘"],["腿推／徒手深蹲","3 組 × 8–12 下"],["啞鈴划船","3 組 × 8–12 下"],["臀推／臀橋","3 組 × 10–12 下"],["胸推","3 組 × 8–12 下"],["農夫走路或平板支撐","3 組"]]},
+{name:"週六",type:"彈性日｜戶外活動",focus:"彈性飲食與活動",meals:[["早餐","全麥吐司 2 片＋水煮蛋 2 顆＋無糖豆漿","約 350–400 kcal"],["午餐","喜歡的外食；優先有肉、有菜，飲料選無糖","約 550–700 kcal"],["下午點心","水果 1 份＋無糖優格","約 150–200 kcal"],["晚餐","番茄雞肉豆腐湯＋熟飯 100–150 g","約 450–500 kcal"]],workout:[["戶外活動","散步、騎車或喜歡的活動 30–45 分鐘"],["彈性原則","可以聚餐；吃到舒服就好，不必用挨餓補償。"]]},
+{name:"週日",type:"休息日｜備餐與恢復",focus:"休息、備餐、回顧",meals:[["早餐","無糖優格＋燕麥＋水果＋水煮蛋 1 顆","約 350–400 kcal"],["午餐","雞胸健康餐或滷排骨便當","約 500–700 kcal"],["下午點心","無糖豆漿 1 瓶","約 120–180 kcal"],["晚餐","蝦仁炒蛋＋嫩豆腐＋青菜＋熟飯 100–150 g","約 450–500 kcal"]],workout:[["休息","不安排正式重訓"],["備餐","準備 2–3 份蛋白質與洗切蔬菜"],["每週回顧","看體重平均、腰圍、睡眠與訓練狀況，不只看單日數字。"]]}
+];
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+let state={checks:{},records:[],water:{},shopping:{},settings:{startDate:'2026-10-27',targetDate:'2026-12-04',cupSize:250}};
+function load(){try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(s&&typeof s==='object')state={...state,...s,settings:{...state.settings,...(s.settings||{})}}}catch(e){}}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){alert('瀏覽器無法儲存資料，請匯出備份。')}}
+function el(id){return document.getElementById(id)}
+let selected=0;
+function setTab(tab){document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));['plan','track','water','shopping'].forEach(t=>el(t+'Tab').hidden=t!==tab);if(tab==='track')renderTracking();if(tab==='water')renderWater();if(tab==='shopping')renderShopping()}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+function renderNav(){el('weekNav').innerHTML=days.map((d,i)=>`<button class="daybtn ${i===selected?'active':''} ${state.checks[i]?.some(Boolean)?'done':''}" data-day="${i}"><strong>${['一','二','三','四','五','六','日'][i]}</strong>${i+1}日</button>`).join('');document.querySelectorAll('.daybtn').forEach(b=>b.addEventListener('click',()=>{selected=+b.dataset.day;renderPlan()}))}
+function renderPlan(){renderNav();const d=days[selected];const key=String(selected);if(!state.checks[key])state.checks[key]=Array(d.meals.length+d.workout.length).fill(false);const arr=state.checks[key];const mealHTML=d.meals.map(m=>`<div class="meal"><div class="meal-top"><span>${m[0]}</span><span class="kcal">${m[2]}</span></div><p>${m[1]}</p></div>`).join('');const mealChecks=d.meals.map((m,i)=>`<label class="checkrow"><input type="checkbox" data-check="${i}" ${arr[i]?'checked':''}><span><b>${m[0]}已完成</b><small>完成這餐後打勾即可</small></span></label>`).join('');const workoutHTML=d.workout.map((w,i)=>{const n=d.meals.length+i;return `<label class="checkrow"><input type="checkbox" data-check="${n}" ${arr[n]?'checked':''}><span><b>${w[0]}</b><small>${w[1]}</small></span></label>`}).join('');el('content').innerHTML=`<section class="panel"><div class="panel-head"><div><h2>${d.name}｜今日計畫</h2><div class="sub">${d.focus}</div></div><span class="pill">${d.type}</span></div><h3>🍽️ 今日菜單</h3>${mealHTML}<div class="note">午餐外食估算誤差較大。蛋白質盡量每餐都有；重訓日不要刻意不吃主食。</div><h3>☑️ 飲食打卡</h3>${mealChecks}</section><section class="panel"><div class="panel-head"><div><h2>🏋️ 運動計畫</h2><div class="sub">依體力調整重量；動作以姿勢正確為優先</div></div></div>${workoutHTML}<div class="note">重訓組間休息約 60–120 秒。若疼痛、頭暈或不舒服，請停止訓練。</div></section>`;document.querySelectorAll('[data-check]').forEach(x=>x.addEventListener('change',()=>{arr[+x.dataset.check]=x.checked;save();updateProgress();renderNav()}));save();updateProgress()}
+function updateProgress(){const arr=state.checks[String(selected)]||[];const done=arr.filter(Boolean).length;el('progressText').textContent=`${done} / ${arr.length} 項`;el('progressBar').style.width=(arr.length?done/arr.length*100:0)+'%'}
+function updateCountdown(){state.settings.startDate=el('startDate').value;state.settings.targetDate=el('targetDate').value;save();const now=new Date();now.setHours(0,0,0,0);const target=new Date(state.settings.targetDate+'T00:00:00');const start=new Date(state.settings.startDate+'T00:00:00');const daysLeft=Math.ceil((target-now)/86400000);const passed=Math.max(1,Math.floor((now-start)/86400000)+1);el('countdown').textContent=daysLeft<0?'已到期':daysLeft===0?'就是今天':`剩 ${daysLeft} 天`;el('daysPassed').textContent=`第 ${Math.min(39,passed)} 天`;el('countdownNote').textContent=daysLeft<0?'健檢日期已過，你可以修改日期，繼續追蹤健康習慣。':daysLeft===0?'今天是健檢日！照平常作息即可，不需要刻意少喝水或挨餓。':`距離健檢還有 ${daysLeft} 天。穩定飲食、運動與睡眠，不需要用挨餓或脫水追求數字。`}
+el('startDate').addEventListener('change',updateCountdown);el('targetDate').addEventListener('change',updateCountdown);
+function renderTracking(){el('recordDate').value=el('recordDate').value||todayISO();const sorted=[...state.records].sort((a,b)=>a.date.localeCompare(b.date));drawChart(el('weightChart'),sorted.filter(x=>x.weight!==null&&x.weight!==undefined).map(x=>({date:x.date,value:x.weight})), 'kg');drawChart(el('fatChart'),sorted.filter(x=>x.fat!==null&&x.fat!==undefined).map(x=>({date:x.date,value:x.fat})), '%');el('recordList').innerHTML=sorted.slice().reverse().map(r=>`<div class="entry"><span><b>${r.date}</b><br>${r.weight!=null?'體重 '+r.weight+' kg':''}${r.fat!=null?'　體脂 '+r.fat+'%':''}${r.waist!=null?'　腰圍 '+r.waist+' cm':''}</span><button data-delete="${r.date}">刪除</button></div>`).join('')||'<p class="muted">還沒有紀錄，輸入今天的數字開始追蹤吧。</p>';document.querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>{if(confirm('確定刪除這筆紀錄？')){state.records=state.records.filter(r=>r.date!==b.dataset.delete);save();renderTracking()}}))}
+function drawChart(canvas,points,unit){const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.font='13px sans-serif';ctx.fillStyle='#778078';if(!points.length){ctx.fillText('新增紀錄後，這裡會顯示變化圖',18,40);return}if(points.length===1){ctx.fillText('再記錄一次，就能看趨勢線',18,40)}const vals=points.map(p=>p.value),min=Math.min(...vals),max=Math.max(...vals),pad=Math.max((max-min)*.25,unit==='%'?0.5:0.3),lo=min-pad,hi=max+pad;ctx.strokeStyle='#e8e3da';ctx.lineWidth=1;for(let i=0;i<4;i++){const y=25+i*(h-60)/3;ctx.beginPath();ctx.moveTo(48,y);ctx.lineTo(w-15,y);ctx.stroke()}ctx.fillStyle='#778078';ctx.textAlign='right';for(let i=0;i<4;i++){const val=hi-i*(hi-lo)/3;ctx.fillText(val.toFixed(1),42,29+i*(h-60)/3)}const xAt=i=>points.length===1?(w+48-15)/2:48+i*(w-63)/(points.length-1);const yAt=v=>25+(hi-v)/(hi-lo)*(h-60);ctx.strokeStyle='#557a61';ctx.lineWidth=3;ctx.beginPath();points.forEach((p,i)=>{const x=xAt(i),y=yAt(p.value);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();points.forEach((p,i)=>{const x=xAt(i),y=yAt(p.value);ctx.fillStyle='#557a61';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();if(points.length<8||i===0||i===points.length-1||i%Math.ceil(points.length/5)===0){ctx.fillStyle='#526056';ctx.textAlign='center';ctx.font='11px sans-serif';ctx.fillText(p.date.slice(5),x,h-13)}});ctx.textAlign='left'}
+el('saveRecord').addEventListener('click',()=>{const date=el('recordDate').value||todayISO(),weight=el('weightInput').value===''?null:Number(el('weightInput').value),fat=el('fatInput').value===''?null:Number(el('fatInput').value),waist=el('waistInput').value===''?null:Number(el('waistInput').value);if(weight===null&&fat===null&&waist===null){alert('請至少輸入體重、體脂或腰圍其中一項。');return}if([weight,fat,waist].some(v=>v!==null&&!Number.isFinite(v))){alert('請輸入有效數字。');return}const rec={date,weight,fat,waist};const i=state.records.findIndex(r=>r.date===date);if(i>=0)state.records[i]=rec;else state.records.push(rec);save();el('weightInput').value='';el('fatInput').value='';el('waistInput').value='';renderTracking();alert('紀錄已儲存！')});
+function getWater(){const date=el('waterDate').value||todayISO();if(!state.water[date])state.water[date]=0;return {date,count:state.water[date]}}
+function renderWater(){el('waterDate').value=el('waterDate').value||todayISO();el('cupSize').value=String(state.settings.cupSize||250);const {date,count}=getWater(),size=Number(el('cupSize').value);el('waterMl').textContent=(count*size).toLocaleString();el('waterCupsText').textContent=`${count} 杯 × ${size} ml`;el('waterCups').innerHTML=Array.from({length:Math.max(8,count)},(_,i)=>`<button class="cup ${i<count?'full':''}" data-cup="${i}">${i<count?'💧':'○'}</button>`).join('');document.querySelectorAll('[data-cup]').forEach(b=>b.addEventListener('click',()=>{state.water[date]=Number(b.dataset.cup)+1;save();renderWater()}));const hist=Object.keys(state.water).sort().reverse().slice(0,14);el('waterHistory').innerHTML=hist.map(d=>`<div class="entry"><span>${d}</span><b>${(state.water[d]*Number(state.settings.cupSize||250)).toLocaleString()} ml（${state.water[d]} 杯）</b></div>`).join('')||'<p class="muted">尚無紀錄。</p>'}
+el('waterDate').addEventListener('change',renderWater);el('cupSize').addEventListener('change',()=>{state.settings.cupSize=Number(el('cupSize').value);save();renderWater()});el('addWater').addEventListener('click',()=>{const {date,count}=getWater();state.water[date]=count+1;save();renderWater()});el('removeWater').addEventListener('click',()=>{const {date,count}=getWater();state.water[date]=Math.max(0,count-1);save();renderWater()});el('clearWater').addEventListener('click',()=>{const {date}=getWater();if(confirm('清空這一天的飲水紀錄？')){state.water[date]=0;save();renderWater()}});
+function renderShopping(){document.querySelectorAll('[data-shop]').forEach(c=>c.checked=!!state.shopping[c.dataset.shop]);document.querySelectorAll('[data-shop]').forEach(c=>c.onchange=()=>{state.shopping[c.dataset.shop]=c.checked;save()})}
+el('exportData').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='減脂小管家備份_'+todayISO()+'.json';a.click();URL.revokeObjectURL(url)});
+el('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());if(!obj||typeof obj!=='object')throw new Error();state={...state,...obj,settings:{...state.settings,...(obj.settings||{})}};save();renderPlan();renderTracking();renderWater();renderShopping();updateCountdown();alert('備份匯入完成。')}catch(err){alert('檔案格式不正確，無法匯入。')}e.target.value=''});
+load();el('startDate').value=state.settings.startDate;el('targetDate').value=state.settings.targetDate;el('recordDate').value=todayISO();el('waterDate').value=todayISO();updateCountdown();renderPlan();renderTracking();renderWater();renderShopping();
+</script>
+</body>
+</html>
